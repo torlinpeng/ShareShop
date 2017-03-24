@@ -1,0 +1,114 @@
+[{"banner":"http://localhost:8080/images/category/0.jpg",
+  "recomend":[
+    {
+      "brand": "专场推荐",
+      "imgs": [{"url":"http://localhost:8080/images/category/4.jpg", "text": "3.7超级品类日"},
+                {"url":"http://localhost:8080/images/category/2.png", "text": "水果"},
+                {"url": "http://localhost:8080/images/category/1.jpg", "text": "跨品类2件5折"}]
+    },
+    {
+      "brand": "热门分类",
+      "imgs": [
+        {"url": "http://localhost:8080/images/category/11.png", "text": "手机"},
+        {"url": "http://localhost:8080/images/category/6.jpg", "text": "笔记本"},
+        {"url": "http://localhost:8080/images/category/10.jpg", "text": "空调"},
+        {"url": "http://localhost:8080/images/category/7.jpg", "text": "收纳用品"},
+        {"url": "http://localhost:8080/images/category/5.jpg", "text": "炒锅"},
+        {"url": "http://localhost:8080/images/category/9.jpg", "text": "啤酒"},
+        {"url": "http://localhost:8080/images/category/11.jpg", "text": "火车票"}]
+    },
+     {"brand": "常用分类", "imgs": [{"url": "http://localhost:8080/images/category/12.jpg", "text": "少女文胸"}]}
+  ]
+},
+
+  {"banner":"http://localhost:8080/images/category/002.jpg",
+    "makeUp":[
+      {
+        "brand": "面部护理",
+        "imgs": [
+          {"url":"http://localhost:8080/images/category/13.jpg", "text": "卸妆"},
+          {"url":"http://localhost:8080/images/category/14.jpg", "text": "洁面"},
+          {"url": "http://localhost:8080/images/category/15.jpg", "text": "爽肤水"},
+          {"url": "http://localhost:8080/images/category/16.jpg", "text": "乳液面膜"},
+          {"url": "http://localhost:8080/images/category/17.jpg", "text": "精华"},
+          {"url": "http://localhost:8080/images/category/18.jpg", "text": "眼霜"},
+          {"url": "http://localhost:8080/images/category/19.jpg", "text": "防晒"},
+          {"url": "http://localhost:8080/images/category/20.jpg", "text": "面膜"},
+          {"url": "http://localhost:8080/images/category/21.jpg", "text": "剃须"},
+          {"url": "http://localhost:8080/images/category/22.jpg", "text": "套装"}
+        ]
+      },
+      {
+        "brand": "身体护理",
+        "imgs": [
+          {"url":"http://localhost:8080/images/category/23.jpg", "text": "沐浴"},
+          {"url":"http://localhost:8080/images/category/24.jpg", "text": "润肤"},
+          {"url": "http://localhost:8080/images/category/25.jpg", "text": "精油"},
+          {"url": "http://localhost:8080/images/category/26.jpg", "text": "颈部"},
+          {"url": "http://localhost:8080/images/category/27.jpg", "text": "手足"},
+          {"url": "http://localhost:8080/images/category/28.jpg", "text": "纤体塑形"},
+          {"url": "http://localhost:8080/images/category/29.jpg", "text": "美胸"},
+          {"url": "http://localhost:8080/images/category/30.jpg", "text": "套装"}
+        ]
+      },
+      {
+        "brand": "口腔护理",
+        "imgs": [
+          {"url":"http://localhost:8080/images/category/31.jpg", "text": "牙膏/牙粉"},
+          {"url":"http://localhost:8080/images/category/32.jpg", "text": "牙刷/牙线"},
+          {"url": "http://localhost:8080/images/category/33.jpg", "text": "漱口水"},
+          {"url": "http://localhost:8080/images/category/34.jpg", "text": "套装"}
+        ]
+      },
+      {
+        "brand": "香水彩妆",
+        "imgs": [
+          {"url":"http://localhost:8080/images/category/35.jpg", "text": "女士香水"},
+          {"url":"http://localhost:8080/images/category/36.jpg", "text": "男士香水"},
+          {"url": "http://localhost:8080/images/category/37.jpg", "text": "底妆"},
+          {"url": "http://localhost:8080/images/category/38.jpg", "text": "眉笔"},
+          {"url":"http://localhost:8080/images/category/39.jpg", "text": "睫毛膏"},
+          {"url":"http://localhost:8080/images/category/40.jpg", "text": "眼线"},
+          {"url": "http://localhost:8080/images/category/41.jpg", "text": "眼影"},
+          {"url": "http://localhost:8080/images/category/42.jpg", "text": "唇部"},
+          {"url": "http://localhost:8080/images/category/43.jpg", "text": "腮红"},
+          {"url": "http://localhost:8080/images/category/44.jpg", "text": "美甲"},
+          {"url": "http://localhost:8080/images/category/45.jpg", "text": "美妆工具"},
+          {"url": "http://localhost:8080/images/category/46.jpg", "text": "套装"}
+        ]
+      },
+      {
+        "brand": "洗发护发",
+        "imgs": [
+          {"url":"http://localhost:8080/images/category/47.jpg", "text": "洗发"},
+          {"url":"http://localhost:8080/images/category/48.jpg", "text": "护发"},
+          {"url": "http://localhost:8080/images/category/49.jpg", "text": "染发"},
+          {"url": "http://localhost:8080/images/category/50.jpg", "text": "造型"},
+          {"url":"http://localhost:8080/images/category/51.jpg", "text": "假发"},
+          {"url":"http://localhost:8080/images/category/52.jpg", "text": "套装"}
+        ]
+      },
+      {
+        "brand": "女性护理",
+        "imgs": [
+          {"url":"http://localhost:8080/images/category/53.jpg", "text": "卫生巾"},
+          {"url":"http://localhost:8080/images/category/54.jpg", "text": "卫生护垫"},
+          {"url": "http://localhost:8080/images/category/55.jpg", "text": "私密护理"},
+          {"url": "http://localhost:8080/images/category/56.jpg", "text": "脱毛膏"}
+        ]
+      },
+      {
+        "brand": "清洁用品",
+        "imgs": [
+          {"url":"http://localhost:8080/images/category/57.jpg", "text": "纸品湿巾"},
+          {"url":"http://localhost:8080/images/category/58.jpg", "text": "衣物清洁"},
+          {"url": "http://localhost:8080/images/category/59.jpg", "text": "清洁工具"},
+          {"url": "http://localhost:8080/images/category/60.jpg", "text": "家庭清洁"},
+          {"url":"http://localhost:8080/images/category/61.jpg", "text": "一次性用品"},
+          {"url":"http://localhost:8080/images/category/62.jpg", "text": "驱虫用品"},
+          {"url":"http://localhost:8080/images/category/63.jpg", "text": "皮具护理"}
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<swiper :list="demo03_list" auto style="width:80%;margin:0 auto;" height="180px" dots-class="custom-bottom" dots-position="center"></swiper>
+<group>
+  <x-switch title="Basic Usage" v-model="show1"></x-switch>
+  <x-switch title="Show cancel menu" v-model="show2"></x-switch>
+  <x-switch title="menu as tips" v-model="show3"></x-switch>
+  <x-switch title="Array menu" v-model="show5"></x-switch>
+</group>
+
+<group title="prevent closing when clicking mask">
+  <x-switch title="Basic Usage" v-model="show4"></x-switch>
+</group>
+
+<actionsheet v-model="show4" :menus="menus1" :close-on-clicking-mask="false" show-cancel></actionsheet>
+
+<actionsheet v-model="show1" :menus="menus1" @on-click-menu="click"></actionsheet>
+
+<actionsheet v-model="show2" :menus="menus2" @on-click-menu="click" show-cancel></actionsheet>
+
+<actionsheet v-model="show3" :menus="menus3" @on-click-menu="click" @on-click-menu-delete="onDelete" show-cancel></actionsheet>
+
+<actionsheet v-model="show5" :menus="menus5" show-cancel @on-click-menu="click"></actionsheet>
+
+</body>
+</html>

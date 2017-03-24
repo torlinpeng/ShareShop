@@ -1,0 +1,42 @@
+<template>
+  <div>
+    <tab :line-width=2 active-color='#fc378c' v-model="index">
+      <tab-item class="vux-center"  v-for="(item, index) in list3" @on-item-click="show(index)"
+                :key="index">{{item}}
+      </tab-item>
+    </tab>
+        <div >{{value}}</div>
+  </div>
+</template>
+
+<script>
+  import { Tab, TabItem} from 'vux'
+  export default {
+    components: {
+      Tab,
+      TabItem,
+    },
+    data () {
+      return {
+        value:"我是没点击之前初始显示的数据",
+        list3: ['收到的消息', '发出的消息'],
+        index:0
+      }
+    },
+    methods:{
+      show(key){
+        switch (key){
+          case 0:
+            this.value="我是没点击之前初始显示的数据"
+                break;
+          case 1:
+            this.value='监听点击事件我的内容改变了'
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+
+</style>
