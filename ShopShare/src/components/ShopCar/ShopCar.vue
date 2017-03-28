@@ -11,16 +11,15 @@
 					<div slot="content" class="demo-content vux-1px-tb">
 						<checker-item :value="1">
 							<div class="proLists">
-
 								<div class="proleft">
-									<my-check class="checks"></my-check>
+									<input type="checkbox" class="checkcs" :value="list.id" @click="currClick(index,$event)" v-model="list.checked">
 									<router-link :to=list.link>
 										<img :src=list.src>
 									</router-link>
 									<span>{{list.name}}
-        	<p class="guige">{{list.text}}</p>
-        	 <p class="charges">￥{{list.charge}}</p>
-        	</span>
+        	                        <p class="guige">{{list.text}}</p>
+        	                        <p class="charges">￥{{list.charge}}</p>
+        	                        </span>
 								</div>
 								<div class="count">
 									<span id="num-jian" @click="reduce(index)">-</span><input type="text" id="input-num" name="数量" v-model="list.numberValue" /><span id="num-jia" @click="add(index)">+</span>
@@ -32,7 +31,8 @@
 			</swipeout>
 		</div>
 		<div class="total">
-			<my-check class="checkall"></my-check>全选
+			<!--<my-check class="checkall"></my-check>-->
+			<input class="checkcss" type="checkbox" v-model="checkAll"> 全选（{{checkedCount}}）
 			<div class="hjcharge">
 				<span>合计：</span>
 				<span class="moneys">￥{{amount}}</span>
@@ -44,29 +44,27 @@
 
 <script>
 	import { XHeader, Group, Cell, XNumber, Checker, CheckerItem, Divider, Panel, Swipeout, SwipeoutItem, SwipeoutButton } from 'vux'
-	import MyCheck from '../UserDefined/MyCheck.vue'
-
 	const prolist = [{
 		src: require('./images/sp02.png'),
 		name: '苹果7S plus',
+		id: 1,
 		charge: '7888',
 		text: '土豪金，32G，港货,请包装严实，妥善寄件，附带发票',
 		link: "/Detail",
-		numberValue: 1
+		numberValue: 1,
+		checked: false
 	}, {
 		src: require('./images/sp02.png'),
 		name: '苹果6S plus',
+		id: 2,
 		charge: '5888',
 		text: '玫瑰红，32G，国产,请包装严实，妥善寄件',
 		link: "/Home",
-		numberValue: 2
-		//      url: {
-		//        path: '/component/radio',
-		//        replace: false
-		//      }
+		numberValue: 2,
+		checked: false
 	}]
-	//求和
-
+	const checks = [];
+	const goodsList = [];
 	export default {
 		components: {
 			XHeader,
@@ -80,9 +78,43 @@
 			Swipeout,
 			SwipeoutItem,
 			SwipeoutButton,
-			MyCheck
 		},
-
+		data() {
+			return {
+				numberValue: 0,
+				error: '',
+				prolist: prolist,
+				//				amount: '',
+				footer: {
+					title: '查看更多',
+					url: 'http://vux.li'
+				},
+				checks: []
+			}
+		},
+		computed: {
+			amount: function() {
+				var amount = 0;
+				var selected = this.prolist.filter(function(list) { return list.checked });
+				for(let i = 0; i < selected.length; i++) {
+					amount += (+selected[i].charge) * (+selected[i].numberValue);
+				}
+				return amount;
+			},
+			checkAll: {
+				get: function() {
+					return this.checkedCount == this.prolist.length;
+				},
+				set: function(value) {
+					this.prolist = this.prolist.map(function(list) { list.checked = value; return list; });
+				}
+			},
+			checkedCount: {
+				get: function() {
+					return this.prolist.filter(function(list) { return list.checked }).length;
+				}
+			}
+		},
 		methods: {
 			add(index) {
 				this.prolist[index].numberValue++;
@@ -94,30 +126,10 @@
 				} else {
 					this.prolist[index].numberValue--;
 				}
-
-			}
-		},
-		data() {
-			return {
-				numberValue: 0,
-				error: '',
-				prolist: prolist,
-//				amount: '',
-				footer: {
-					title: '查看更多',
-					url: 'http://vux.li'
-				}
-			}
-		},
-		computed: {
-			amount: function() {
-				var amount = 0;
-					  for(var i = 0; i < this.prolist.length; i++) {
-						var self = this.prolist[i];
-						amount += (+self.charge) * (+self.numberValue);
-					}
-				return amount;
-			}
+			},
+			currClick(index, event) {
+				console.log(event)
+			},
 		}
 	}
 </script>
@@ -128,7 +140,7 @@
 	}
 	
 	.vux-checker-item {
-		width: 88.5%;
+		width: 100%;
 	}
 	
 	.weui-cell {
@@ -223,13 +235,16 @@
 		float: right;
 	}
 	
-	.checkall {
-		margin: 0px 5px !important;
+	.checkcs {
+		float: left;
+		margin: 48px 15px 0;
 	}
-	
+	.checkcss{
+		margin-left: 15px;
+	}
 	.count {
 		position: absolute;
-		right: 8%;
+		right: 15px;
 		top: 65%;
 	}
 	

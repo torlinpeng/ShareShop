@@ -13,9 +13,6 @@
 					<step-item title="设置密码"></step-item>
 					<step-item title="去登录"></step-item>
 				</step>
-				<!--<div class="btn_wrap">
-        <x-button type="primary" @click.native="nextStep">{{ $t('next step') }}</x-button>
-      </div>-->
 			</div>
 		</div>
 		<div class="registers">
@@ -91,15 +88,26 @@
 				//    console.log(val)
 			},
 			getCode() {
-				//  	var YzCode = Math.floor(Math.random () * 9000) + 1000;
-				//  	console.log(YzCode);
-				//  	return YzCode
 				var _this = this;
-				var mobile = _this.PhoneNumber;
-				var title ="用户说明";
-				this.$http.post("http://192.168.15.177/zrmall/User/User/send_mobile_verify", { mobile: mobile,title:title  }).then(function(res) {
-					console.log(res.data)
-				});
+				var mobile = _this.PhoneNumber
+				var title = "用户说明"
+				var url = "http://www.zhongrenjituan.cn/index.php?s=/user/user/send_mobile_verify"
+//				this.$http.post("http://www.zhongrenjituan.cn/index.php?s=/user/user/send_mobile_verify", {mobile:mobile,title:title}).then(function(response) {
+//					console.log(res.data)
+//				});
+				var param = { mobile: mobile, title: title };
+				$.ajax({
+					url: url,
+					type: 'POST', 
+					data: param,
+					dataType: 'json',
+					success: function(data) {
+						console.log(data);
+					},
+					error: function(xhr, textStatus) {
+						console.log('我是错误返回：', xhr);
+					},
+				})
 			},
 			nextStep() {
 				if(this.PhoneNumber == "" || this.YzCode == "" && this.YzCode == rand) {

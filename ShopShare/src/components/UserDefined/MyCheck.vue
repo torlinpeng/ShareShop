@@ -4,7 +4,7 @@
         
     </div>  -->
     <div class="checks">
-    	 <input type="checkbox" class="checks" v-model="checkedNames">
+    	 <input type="checkbox" class="checks"  v-model="checkedNames">
     </div>
  
 </template>

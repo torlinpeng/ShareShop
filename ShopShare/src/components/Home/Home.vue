@@ -36,10 +36,10 @@
   import Seckill from './Seckill.vue'
   import {Search, Swiper,SwiperItem} from 'vux'
   const imgList = [
-    {img:require('./images/1.jpg'),url:'/User'},
-    {img:require('./images/2.jpg'),url:'/ShopCar'},{img:require('./images/3.jpg'),url:'/Items'},
-    {img:require('./images/4.jpg'),url:'/Finding'},{img:require('./images/5.jpg'),url:'/User'},
-    {img:require('./images/6.jpg'),url:'/Finding'}]
+    {img:require('./images/swpera.jpg'),url:'/User'},
+    {img:require('./images/swperb.jpg'),url:'/ShopCar'},{img:require('./images/swperc.jpg'),url:'/Items'},
+    {img:require('./images/swperd.jpg'),url:'/Finding'},{img:require('./images/swpere.jpg'),url:'/User'},
+    {img:require('./images/swperf.jpg'),url:'/Finding'}]
   const urlList = imgList.map((item, index) => ({
     img: item.img,
     url:item.url
