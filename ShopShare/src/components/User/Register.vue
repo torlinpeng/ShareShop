@@ -1,20 +1,8 @@
 <template>
 	<div>
-
 		<x-header>注册
 			<router-link slot="right" to="/User">登录</router-link>
 		</x-header>
-
-		<div style="width: 95%;margin: 0 auto;">
-			<br>
-			<div>
-				<step v-model="step2" background-color='#fbf9fe' gutter="20px">
-					<step-item title="输入信息"></step-item>
-					<step-item title="设置密码"></step-item>
-					<step-item title="去登录"></step-item>
-				</step>
-			</div>
-		</div>
 		<div class="registers">
 			<ul class="setcode" v-show="show1">
 				<li>
@@ -22,7 +10,7 @@
 				</li>
 				<li>
 					<x-input title="输入验证码" v-model="YzCode" class="weui-vcode">
-						<x-button slot="right" type="primary" mini @click.native="getCode">获取验证码</x-button>
+						<x-button slot="right" type="primary" :disabled="disable" mini @click.native="getCode()">获取验证码 ({{num}})</x-button>
 					</x-input>
 				</li>
 			</ul>
@@ -35,10 +23,20 @@
 				</li>
 			</ul>
 
-			<div v-show="show3">
-				<msg title="快去登录吧！" :buttons="buttons" :icon="icon"></msg>
+			<div class="sucfont loginDiv" v-show="show3">
+				<div class="succ" v-show="succ">
+					<span>恭喜你，注册成功!</span>
+					<router-link slot="right" to="/User">
+						<XButton class="loginbtn">去登录</XButton>
+					</router-link>
+				</div>
+				<div class="succ" v-show="fass">
+					<span>很遗憾，注册失败!<p>原因：{{reson}}</p></span>
+					<router-link slot="right" to="/User">
+						<XButton class="loginbtn">重新注册</XButton>
+					</router-link>
+				</div>
 			</div>
-
 		</div>
 		<div class="loginDiv" v-show="show4">
 			<XButton class="loginbtn" @click.native="nextStep">下一步</XButton>
@@ -47,8 +45,10 @@
 </template>
 
 <script>
-	import { XHeader, Step, StepItem, XHr, XButton, XInput, Group, Msg, Divider } from 'vux'
-	//	var show1=true;
+	import { XHeader, Step, StepItem, XHr, XButton, XInput, Group, Divider } from 'vux'
+	var ifycode = ''
+	var num = 30
+	var reson = ""
 	export default {
 		components: {
 			XHeader,
@@ -58,13 +58,11 @@
 			XHr,
 			XInput,
 			Group,
-			Msg,
 			Divider,
 			XButton
 		},
 		data() {
 			return {
-				step2: 0,
 				PhoneNumber: '',
 				password: '',
 				password2: '',
@@ -73,14 +71,10 @@
 				show2: false,
 				show3: false,
 				show4: true,
-				//    nextStep:nextStep(),
-				description: 'msg description',
-				icon: '',
-				buttons: [{
-					type: 'primary',
-					text: '现在去登录',
-					link: '/User'
-				}]
+				succ: false,
+				fass: false,
+				reson: reson,
+				num: num, //默认倒数30秒
 			}
 		},
 		methods: {
@@ -91,75 +85,69 @@
 				var _this = this;
 				var mobile = _this.PhoneNumber
 				var title = "用户说明"
-				var url = "http://www.zhongrenjituan.cn/index.php?s=/user/user/send_mobile_verify"
-//				this.$http.post("http://www.zhongrenjituan.cn/index.php?s=/user/user/send_mobile_verify", {mobile:mobile,title:title}).then(function(response) {
-//					console.log(res.data)
-//				});
-				var param = { mobile: mobile, title: title };
-				$.ajax({
-					url: url,
-					type: 'POST', 
-					data: param,
-					dataType: 'json',
-					success: function(data) {
-						console.log(data);
-					},
-					error: function(xhr, textStatus) {
-						console.log('我是错误返回：', xhr);
-					},
-				})
-			},
-			nextStep() {
-				if(this.PhoneNumber == "" || this.YzCode == "" && this.YzCode == rand) {
+				if(mobile == "") {
 					return false;
 				} else {
-					this.step2++
-						var step = this.step2 + 1
-					var _this = this
-					if(step > 3) {
-						return false;
-					}
-					if(step == 2) {
-						console.log(_this.rand)
-						this.$http.post("http://localhost:8080/register", {
-							PhoneNumber: _this.PhoneNumber,
-							rand: _this.YzCode
-						}).then(function(res) {
-							//      	 this.$router.push('/home')
-							console.log("您注册的用户名是:" + res.data.PhoneNumber)
-							console.log("验证码是:" + res.data.rand)
-						})
-
-						this.show1 = false;
-						this.show2 = true;
-					}
-					if(step == 3) {
-						this.show1 = false;
-						this.show2 = false;
-						this.show3 = true;
-						this.show4 = false;
-					}
-					console.log(step);
+					_this.$http.post("http://www.zhongrenjituan.cn/index.php?s=/user/user/send_mobile_verify", _this.$qs.stringify({ mobile: mobile, title: title })).then(function(response) {
+						ifycode = response.data.mobis;
+						_this.times()
+					})
 				}
 			},
-			changeIcon() {
-				if(!this.icon || this.icon === 'success') {
-					this.icon = 'warn'
-					return
+			times() {
+				var _this = this;
+				if(_this.num <= 1) {
+					_this.num = 30
+					_this.disable = false
+					return false
+				} else {
+					_this.num--
+						_this.disable = true
 				}
-				if(this.icon === 'warn') {
-					this.icon = 'info'
-					return
+				setTimeout(function() {
+					_this.times()
+				}, 1000)
+
+				return _this.num
+			},
+
+			nextStep() {
+				var mobile = this.PhoneNumber
+				var password = this.password
+				var repassword = this.password2
+
+				if(this.PhoneNumber == "" || this.YzCode == "" || this.YzCode != ifycode) {
+					alert("请输入")
+					return false
+				} else {
+					this.show1 = false
+					this.show2 = true
 				}
-				if(this.icon === 'info') {
-					this.icon = 'waiting'
-					return
-				}
-				if(this.icon === 'waiting') {
-					this.icon = 'success'
+				if(password == "" || repassword == "" || password != repassword) {
+					return false
+				} else {
+					var self = this
+					console.log(this)
+					this.$http.post("http://www.zhongrenjituan.cn/index.php?s=/user/user/register", this.$qs.stringify({ mobile: mobile, reg_type: 'mobile', password: password, repassword: repassword }))
+						.then(function(response) {
+							var status = response.data.status
+							if(status == 1) {
+								self.succ = true
+								self.fass = false
+							} else {
+								self.succ = false
+								self.fass = true
+								self.reson = response.data.info
+							}
+						})
+					this.show1 = false
+					this.show2 = false
+					this.show3 = true
+					this.show4 = false
 				}
 			}
-		}
+
+		},
 	}
 </script>
 
@@ -278,5 +266,23 @@
 		font-size: 16px;
 		display: inline-block;
 		text-shadow: #aaa 3px 3px 3px;
+	}
+	
+	.sucfont {
+		text-align: center;
+		color: #008000;
+		font-size: 24px;
+	}
+	
+	.sucfont span {
+		display: inline-block;
+		margin: 50px 0 100px 0;
+	}
+	
+	.sucfont span p {
+		margin-top: 5px;
+		display: inline-block;
+		color: #ba331a;
+		font-size: 16px
 	}
 </style>

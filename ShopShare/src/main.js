@@ -28,6 +28,9 @@ FastClick.attach(document.body)
 //}
 //)
 Vue.prototype.$http = axios
+Vue.prototype.$qs= require('qs')
+//Vue.prototype.$router= router
+//Vue.http.options.emulateHTTP =true;
 new Vue({
   el: '#app',
   router,

@@ -7,11 +7,11 @@
    	<ul>
    		<li>
    			<img :src="require('./images/user.svg')"/>
-   		     <x-input title="账号" class="sruser" v-model="newuser.username" name="mobile" placeholder="请输入手机号码" keyboard="number" is-type="china-mobile"></x-input>
+   		     <x-input title="账号" class="sruser" v-model="username" name="mobile" placeholder="请输入手机号码" keyboard="number" is-type="china-mobile"></x-input>
    		</li>
    		<li>
    			<img :src="require('./images/pass.svg')"/>
-   		     <x-input title="密码" class="sruser" v-model="newuser.password" name="password" placeholder="请输入密码" keyboard="password" is-type="password"></x-input>
+   		     <x-input title="密码" class="sruser" v-model="password" name="password" placeholder="请输入密码" keyboard="password" is-type="password"></x-input>
    		</li>
    	</ul>
    </div>
@@ -42,27 +42,24 @@
     },
         data () {
             return {
-            newuser :{
-            username:'',
-            password:''
-             }
+             password:"",
+             username:""
         }
    },
         methods:{
         userlogin(){
-            const the = this;
-            console.log(the)
-            this.$store.dispatch('login',this.newuser).then(function(){
-
-                if(the.$store.state.user.seccLogin){
-                    alert('登录成功！');
-                    the.$router.push('/home')
-                    the.$store.state.user.seccLogin = 0
-                }else{
-                    alert('登录失败！')
-                }
-            })
-
+            var mobile = this.username
+            var password = this.password
+            var _this=this
+            if(mobile =="" || password ==""){
+            	alert("请输入完整")
+            }else{
+            this.$http.post("http://www.zhongrenjituan.cn/index.php?s=/user/user/login", this.$qs.stringify({account: mobile,  password: password}))
+						.then(function(response) {
+						console.log(response.data.status)
+                        _this.$router.push('/Home');
+				})
+            }
         }
     },
     }
